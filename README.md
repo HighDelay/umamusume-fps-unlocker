@@ -1,6 +1,6 @@
-# Uma-fps-unlocker
+# Umamusume-fps-unlocker
 
-A simple Python script to unlock the frame rate of **"That one horse girl game (GLOBAL Version)"** on Windows.
+A simple Python script to unlock the frame rate of **"UM:PD (GLOBAL Version)"** on Windows.
 
 ## Features
 
