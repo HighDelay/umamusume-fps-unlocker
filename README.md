@@ -23,7 +23,7 @@ A simple Python script to unlock the frame rate of **"UM:PD (GLOBAL Version)"** 
     ```
     pip install -r requirements.txt
     ```
-3. Or just download from the [Release](https://github.com/HighDelay/uma-fps-unlocker/releases) page.
+3. Or just download from the [Release](https://github.com/HighDelay/umamusume-fps-unlocker/releases) page.
 
 ## Usage
 
