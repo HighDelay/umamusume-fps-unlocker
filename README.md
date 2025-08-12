@@ -27,7 +27,7 @@ A simple Python script to unlock the frame rate of **"That one horse girl game (
 
 ## Usage
 
-1. Start **Umamusume: Pretty Derby**.
+1. Start **the game**.
 2. Run the script:
     ```
     python fps_unlocker.py
