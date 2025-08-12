@@ -34,6 +34,8 @@ A simple Python script to unlock the frame rate of **"UM:PD (GLOBAL Version)"** 
     ```
 3. The script will automatically detect the game process and unlock the FPS.
 
+![Screenshot](Screenshot.png)
+
 ## Disclaimer
 
 - Use at your own risk.
