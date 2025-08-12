@@ -23,6 +23,7 @@ A simple Python script to unlock the frame rate of **"That one horse game"** on 
     ```
     pip install -r requirements.txt
     ```
+3. Or just download from the [Release](https://github.com/HighDelay/uma-fps-unlocker/releases) page.
 
 ## Usage
 
