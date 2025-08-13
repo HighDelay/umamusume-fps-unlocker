@@ -61,17 +61,21 @@ def restore_patch():
 # Register the restore function to be called on exit
 atexit.register(restore_patch)
 
-# Create the main window
+# GUI
+
+root = tk.Tk()
+root.title("Umamusume FPS Unlocker")
+root.resizable(False, False)
 
 def open_web():
     webbrowser.open_new("https://del4yowo.id.vn/")
 
-root = tk.Tk()
-root.title("Umamusume FPS Unlocker")
+def set_fps(fps):
+    fps_entry.delete(0, tk.END)
+    fps_entry.insert(0, str(fps))
+    apply_patch()
 
-# Create and place the widgets
-
-frame = tk.Frame(root, padx=100, pady=100)
+frame = tk.Frame(root, padx=70, pady=70)
 frame.pack()
 
 label = tk.Label(frame, text="Enter desired FPS:")
@@ -81,8 +85,23 @@ fps_entry = tk.Entry(frame)
 fps_entry.pack(pady=5)
 fps_entry.insert(0, "120")
 
-set_button = tk.Button(frame, text="Set FPS & Apply Patch", command=apply_patch)
+preset_frame = tk.Frame(frame)
+preset_frame.pack(pady=5)
+
+preset_60_button = tk.Button(preset_frame, text="60 FPS", command=lambda: set_fps(60))
+preset_60_button.pack(side=tk.LEFT, padx=5)
+
+preset_120_button = tk.Button(preset_frame, text="120 FPS", command=lambda: set_fps(120))
+preset_120_button.pack(side=tk.LEFT, padx=5)
+
+preset_240_button = tk.Button(preset_frame, text="240 FPS", command=lambda: set_fps(240))
+preset_240_button.pack(side=tk.LEFT, padx=5)
+
+set_button = tk.Button(frame, text="Set Custom FPS & Apply Patch", command=apply_patch)
 set_button.pack(pady=10)
+
+label = tk.Label(frame, text="Use at your own risk.", foreground="red")
+label.pack(pady=5)
 
 label = tk.Label(text="With 🩷 by HighDel4y", fg="purple", cursor="hand2")
 label.bind("<Button-1>", lambda e: open_web())
