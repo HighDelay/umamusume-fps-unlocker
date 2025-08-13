@@ -77,16 +77,16 @@ frame.pack()
 label = tk.Label(frame, text="Enter desired FPS:")
 label.pack(pady=5)
 
-label = tk.Label(text="With 🩷 by HighDel4y", fg="purple", cursor="hand2")
-label.bind("<Button-1>", lambda e: open_web())
-label.pack(pady=10)
-
 fps_entry = tk.Entry(frame)
 fps_entry.pack(pady=5)
 fps_entry.insert(0, "120")
 
 set_button = tk.Button(frame, text="Set FPS & Apply Patch", command=apply_patch)
 set_button.pack(pady=10)
+
+label = tk.Label(text="With 🩷 by HighDel4y", fg="purple", cursor="hand2")
+label.bind("<Button-1>", lambda e: open_web())
+label.pack(pady=10)
 
 # Start the GUI event loop
 root.mainloop()
