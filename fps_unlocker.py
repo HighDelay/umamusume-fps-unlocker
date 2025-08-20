@@ -11,7 +11,7 @@ pm = None
 original_bytes = None
 patch_address = 0
 
-def apply_patch():
+def apply_nop_patch():
     global pm, original_bytes, patch_address
     try:
         pm = pymem.Pymem("UmamusumePrettyDerby.exe")
@@ -49,6 +49,32 @@ def apply_patch():
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {e}")
 
+def set_fps_by_address():
+    global pm
+    try:
+        pm = pymem.Pymem("UmamusumePrettyDerby.exe")
+        base = pymem.process.module_from_name(pm.process_handle, "GameAssembly.dll").lpBaseOfDll
+        
+        new_fps = int(fps_entry.get())
+
+        # Pointer
+        addr = pm.read_longlong(base + 0x0374C5E8)
+        addr = pm.read_longlong(addr + 0xB8)
+        addr = pm.read_longlong(addr + 0x8)
+        addr = pm.read_longlong(addr + 0x30)
+        addr = pm.read_longlong(addr + 0x30)
+        addr = pm.read_longlong(addr + 0x818)
+        
+        # Final address
+        pm.write_int(addr + 0x9D0, new_fps)
+        
+        messagebox.showinfo("Success", f"FPS set to {new_fps} using the alternative method!")
+        
+    except pymem.exception.ProcessNotFound:
+        messagebox.showerror("Error", "Game process (UmamusumePrettyDerby.exe) not found. Please run the game first before running this program!")
+    except Exception as e:
+        messagebox.showerror("Error", f"An error occurred: {e}")
+
 def restore_patch():
     global pm, original_bytes, patch_address
     if pm and original_bytes and patch_address:
@@ -73,7 +99,7 @@ def open_web():
 def set_fps(fps):
     fps_entry.delete(0, tk.END)
     fps_entry.insert(0, str(fps))
-    apply_patch()
+    apply_nop_patch()
 
 frame = tk.Frame(root, padx=70, pady=70)
 frame.pack()
@@ -83,7 +109,7 @@ label.pack(pady=5)
 
 fps_entry = tk.Entry(frame)
 fps_entry.pack(pady=5)
-fps_entry.insert(0, "120")
+fps_entry.insert(0, "60")
 
 preset_frame = tk.Frame(frame)
 preset_frame.pack(pady=5)
@@ -97,8 +123,11 @@ preset_120_button.pack(side=tk.LEFT, padx=5)
 preset_240_button = tk.Button(preset_frame, text="240 FPS", command=lambda: set_fps(240))
 preset_240_button.pack(side=tk.LEFT, padx=5)
 
-set_button = tk.Button(frame, text="Set Custom FPS & Apply Patch", command=apply_patch)
-set_button.pack(pady=10)
+set_button = tk.Button(frame, text="Set Custom FPS & Apply Patch", command=apply_nop_patch)
+set_button.pack(pady=5)
+
+alt_set_button = tk.Button(frame, text="Set FPS (Alternative)", command=set_fps_by_address)
+alt_set_button.pack(pady=5)
 
 label = tk.Label(frame, text="Use at your own risk.", foreground="red")
 label.pack(pady=5)
