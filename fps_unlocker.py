@@ -57,16 +57,15 @@ def set_fps_by_address():
         
         new_fps = int(fps_entry.get())
 
-        # Pointer
-        addr = pm.read_longlong(base + 0x0374C5E8)
-        addr = pm.read_longlong(addr + 0xB8)
+        # Pointer (2/9/2025)
+        addr = pm.read_longlong(base + 0x0359E248)
+        addr = pm.read_longlong(addr + 0x268)
         addr = pm.read_longlong(addr + 0x8)
-        addr = pm.read_longlong(addr + 0x30)
-        addr = pm.read_longlong(addr + 0x30)
-        addr = pm.read_longlong(addr + 0x818)
+        addr = pm.read_longlong(addr + 0x18)
+        addr = pm.read_longlong(addr + 0x18)
         
         # Final address
-        pm.write_int(addr + 0x9D0, new_fps)
+        pm.write_int(addr + 0x20, new_fps)
         
         messagebox.showinfo("Success", f"FPS set to {new_fps} using the alternative method!")
         
